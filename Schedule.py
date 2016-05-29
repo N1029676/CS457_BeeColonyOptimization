@@ -26,6 +26,17 @@ class Schedule:
         """
         return 0
 
+    def check_prereqs(self, course):
+        if course.prereq_codes is None:
+            return 0
+        prereqs_unmet = len(course.prereq_codes)
+        for prereq in course.prereq_codes:
+            for session in self.schedule:
+                if session.course == prereq:
+                    prereqs_unmet -= 1
+                    break
+        return prereqs_unmet
+
     def add_session(self, session):
         self.schedule.append(session)
 
@@ -43,7 +54,7 @@ class Schedule:
         return output
 
     def sort(self):
-        self.schedule.sort(key=lambda x: x.course.code, reverse=False)
+        self.schedule.sort(key=lambda x: x.quarter, reverse=False)
 
     def swap_course(self, course_one, course_two):
         return 0
