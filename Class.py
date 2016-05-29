@@ -19,6 +19,9 @@ class Course:
         else:
             self.electiveCourses.append(self)
 
+    def __str__(self):
+        return self.code + " " + str(self.credits)
+
     def add_session(self, session):
         self.sessions.append(session)
         session.add_code(self)
@@ -257,6 +260,15 @@ cs492.session(Session(9, unknown))
 
 # Typical Elective Courses
 cs105 = Course('cs105', 4, None, False, 0)
+cs105.session(Session(1))
+cs105.session(Session(2))
+cs105.session(Session(3))
+cs105.session(Session(4))
+cs105.session(Session(5))
+cs105.session(Session(6))
+cs105.session(Session(7))
+cs105.session(Session(8))
+cs105.session(Session(9))
 
 cs250 = Course('cs250', 4, None, False, 0)
 cs250.session(Session(1, ))
@@ -271,9 +283,9 @@ cs351.session(Session(5, ))
 cs351.session(Session(8, ))
 
 cs352 = Course('cs352', 4, [cs351], False, 0)
-cs351.session(Session(3, ))
-cs351.session(Session(6, ))
-cs351.session(Session(9, ))
+cs352.session(Session(3, ))
+cs352.session(Session(6, ))
+cs352.session(Session(9, ))
 
 cs367 = Course('cs367', 4, [cs105], False, 0)
 cs367.session(Session(3, ))
