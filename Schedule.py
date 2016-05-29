@@ -42,6 +42,9 @@ class Schedule:
             output = self.schedule
         return output
 
+    def sort(self):
+        self.schedule.sort(key=lambda x: x.course.code, reverse=False)
+
     def swap_course(self, course_one, course_two):
         return 0
 
