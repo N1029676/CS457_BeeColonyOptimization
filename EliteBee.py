@@ -1,10 +1,9 @@
 from Schedule import *
 import threading
 import random
+import Queue
 
-elite_schedules_lock = threading.Lock()
-elite_schedules = list()
-
+elite_schedules = Queue.Queue()
 
 class EliteBee(threading.Thread):
     def __init__(self, iterations):
@@ -16,18 +15,15 @@ class EliteBee(threading.Thread):
             selected_courses = list(Course.requiredCourses)
             electives_available = list(Course.electiveCourses)
             credit_count = 0
-            required_credits = 106
 
             for course in selected_courses:
                 credit_count += course.credits
 
-            while credit_count < required_credits:
+            while credit_count < REQUIRED_CREDITS:
                 random.shuffle(electives_available)
                 selected_elective_course = electives_available.pop()
                 credit_count += selected_elective_course.credits
                 selected_courses.append(selected_elective_course)
 
-            elite_schedules_lock.acquire()
-            elite_schedules.append(selected_courses)
-            elite_schedules_lock.release()
+            elite_schedules.put(selected_courses)
             self.iterations -= 1

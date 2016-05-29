@@ -1,5 +1,7 @@
 from Class import *
 
+REQUIRED_CREDITS = 106
+
 class Schedule:
     def __init__(self, startYear, startQuarter):
         self.startYear = startYear
