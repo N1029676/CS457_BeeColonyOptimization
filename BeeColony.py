@@ -4,30 +4,29 @@ import threading
 import time
 import random
 
+
 class EliteBee (threading.Thread):
-    def __init__(self, threadID, name, counter):
+    def __init__(self, threadid, name, iterations):
         threading.Thread.__init__(self)
-        self.threadID = threadID
+        self.threadID = threadid
         self.name = name
-        self.counter = counter
+        self.iterations = iterations
 
     def run(self):
-        print "Starting " + self.name
-        randomInt = random.randint(1, 20)
-        while self.counter > 0:
-            threadLock.acquire()
-            time.sleep(2.0 / randomInt)
-            print_time(self.name, 1, self.counter)
-            threadLock.release()
-            self.counter -= 1
+        while self.iterations > 0:
+            eliteScheduleLock.acquire()
+
+            eliteScheduleLock.release()
+            self.iterations -= 1
 
 
-def print_time(threadName, delay, counter):
-    print "%s: %s - %s" % (threadName, counter, time.ctime(time.time()))
-
-
-threadLock = threading.Lock()
 threads = []
+
+eliteSchedules = list()
+eliteScheduleLock = threading.Lock()
+
+
+
 
 thread1 = EliteBee(1, "Bee1", 30)
 thread2 = EliteBee(2, "Bee2", 60)
