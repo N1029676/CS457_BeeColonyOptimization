@@ -20,11 +20,4 @@ threads.append(thread4)
 for thread in threads:
     thread.join()
 
-for schedule in elite_schedules:
-    for course in schedule:
-        print course,
-    print "\n"
-
-print len(elite_schedules)
-
 print "Exiting main thread!"
