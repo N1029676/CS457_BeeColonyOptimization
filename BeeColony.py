@@ -24,10 +24,6 @@ threads.append(thread2)
 threads.append(thread4)
 
 print "Main thread waiting!"
-# elite_schedules.join()
-# scout_schedules.join()
-
-# elite_schedules.put(None)
 
 for thread in threads:
     thread.join()
