@@ -18,6 +18,7 @@ class Course:
             self.requiredCourses.append(self)
         else:
             self.electiveCourses.append(self)
+        # TODO: Write better code for prereq detection. Expand ALL prereqs, not just what is listed.
 
     def __str__(self):
         return self.code + " " + str(self.credits)
